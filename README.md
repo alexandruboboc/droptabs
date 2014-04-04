@@ -17,6 +17,10 @@ This plugin was tested with JQuery 1.10.1, but should work with older versions.
 
 Droptabs works with Bootstrap default [tab](http://getbootstrap.com/javascript/#tabs) classes and structure, but selectors can be modified for using with other scenarios.
 
+Demo
+------------
+Demo available [here](http://pippogsm.github.io/droptabs/).
+
 Optional parameters
 -------------------
 
