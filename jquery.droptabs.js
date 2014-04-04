@@ -46,15 +46,11 @@
 				return hiddenElementWidth;
 			}
 			
-			$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			  e.target // activated tab
-			  e.relatedTarget // previous tab
-			  console.log(e.relatedTarget);
-			})
-
-			var enbleDevelopment =  function () {
-			
-			
+			function manageActive(elem) {
+				//fixes a bug where Bootstrap can't remove the 'active' class on elements after they've been hidden inside the dropdown
+				$('a', $(elem)).on('show.bs.tab', function (e) {
+					$(e.relatedTarget).parent().removeClass('active');
+				})
 			}
 			
 			//Start Development info
@@ -73,7 +69,6 @@
 				}
 			}		
 			//End Development info
-			
 			
 			var visibleTabsWidth = function () {
 				var visibleTabsWidth = 0;
@@ -98,23 +93,25 @@
 				}
 				//End Development info	
 				
-				if (availableSpace()<0) {//cod pentru ascundere taburi
+				if (availableSpace()<0) {//we will hide tabs here
 					var x = availableSpace();
 					$($visibleTabs().get().reverse()).each(function( index ){
 						if (!($(this).hasClass('always-visible'))){	
-								$(this).clone().prependTo(dropdownMenu);
-								x=x+$(this).outerWidth();
+								var clone=$(this).clone().prependTo(dropdownMenu);
+								manageActive(clone);
+								x=x+clone.outerWidth();
 								$(this).remove(); 
 						}  
-						if (x>0) {return false;}
+						if (x>=0) {return false;}
 					});
 				}
 				
-				if (availableSpace()>getFirstHiddenElementWidth()) { // cod pentru aducere taburi afara
+				if (availableSpace()>getFirstHiddenElementWidth()) { //and here we bring the tabs out
 					var x = availableSpace();
 					$($dropdownTabs()).each(function( index ){
-						if (getHiddenElementWidth(this) < x && !($(this).hasClass('always-dropdown'))){				
-							var clone = $(this).clone().appendTo($container);
+						if (getHiddenElementWidth(this) < x && !($(this).hasClass('always-dropdown'))){	
+							var clone = $(this).clone().appendTo($container);	
+							manageActive(clone);
 							x = x-clone.outerWidth();
 							$(this).remove();
 						} else {return false;}
@@ -123,6 +120,7 @@
 			}
 			
 			//init
+			
 			if (s.autoArrangeTabs) {
 				var tempTabs = [];
 				$($visibleTabs().get().reverse()).each(function( index ){
@@ -132,12 +130,19 @@
 					}
 				});
 				for (var i = 0; i < tempTabs.length; i++ ) {
-					console.log(tempTabs[i]);
 					$container.prepend(tempTabs[i]);
 				}
 			}
 			
+			
 			arrangeTabs();
+			$dropdownTabs().each( function() {
+				manageActive($(this));
+			});
+			
+			$visibleTabs().each( function() {
+				manageActive($(this));
+			});
 			
 			$( window ).resize(function() {
 				arrangeTabs();
