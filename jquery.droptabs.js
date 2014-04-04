@@ -117,6 +117,8 @@
 						} else {return false;}
 					 });
 				}
+				
+				if ($dropdownTabs().length <= 0) {dropdown.hide();} else {dropdown.show();}
 			}
 			
 			//init
