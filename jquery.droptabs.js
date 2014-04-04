@@ -49,7 +49,7 @@
 			$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			  e.target // activated tab
 			  e.relatedTarget // previous tab
-			  alert(e.relatedTarget);
+			  console.log(e.relatedTarget);
 			})
 
 			var enbleDevelopment =  function () {
