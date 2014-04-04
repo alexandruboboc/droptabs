@@ -28,35 +28,43 @@ Droptabs supports optional parameters.
 
 ### dropdownSelector
 Jquery selector for the dropdown container.
+
 **Default: 'li.dropdown'**
 
 ### dropdownMenuSelector
 Jquery selector for the dropdown container (menu) that holds the elements (tabs).
+
 **Default: 'ul.dropdown-menu'**
 
 ### dropdownTabsSelector
 Jquery selector for the elements (tabs).
+
 **Default: 'ul.dropdown-menu'**
 
 ### dropdownTabsSelector
 Jquery selector for the elements (tabs). This will only select elements under current container.
+
 **Default: 'li'**
 
 ### visibleTabsSelector
 Jquery selector for the visible elements (tabs). This will only select elements under current container.
 **Will be changed soon, don't use it!
+
 **Default: '>li:not(.dropdown)'**
 
 ### autoArrangeTabs
 Wether to auto arrange tabs that are always visible in front of all other tabs.
+
 **Default: 'true'**
 
 ### development
 This enables a fixed developer div that shows some live info. Only for use in development mode.
+
 **Default: 'false'**
 
 ### developmentId
 If needed, the Id of the div that holds the developer info can be changed.
+
 **Default: 'dt-devInfo'**
 
 How to Use
