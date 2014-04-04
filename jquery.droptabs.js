@@ -39,6 +39,13 @@
 				return hiddenElementWidth;
 			}
 			
+			function getHiddenElementWidth(elem) {
+				var tempElem=$(elem).clone().appendTo($container).css("position","fixed");
+				var hiddenElementWidth = $(tempElem).outerWidth();
+				$(tempElem).remove();
+				return hiddenElementWidth;
+			}
+
 			var enbleDevelopment =  function () {
 			
 			
