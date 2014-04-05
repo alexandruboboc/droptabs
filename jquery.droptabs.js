@@ -51,6 +51,15 @@
 				$('a', $(elem)).on('show.bs.tab', function (e) {
 					$(e.relatedTarget).parent().removeClass('active');
 				})
+				$('a', $(elem)).on('shown.bs.tab', function (e) {
+					if ($(dropdown).hasClass('active')) {
+						//$('>a', dropdown).html('Selected <b class="caret"></b>');
+						$('>a', dropdown).html(($('>li.active>a', dropdownMenu).html()).substring(0,10) + '... <b class="caret"></b>');
+					} else {
+						$('>a', dropdown).html('Dropdown <b class="caret"></b>'); 
+					}
+				})
+				
 			}
 			
 			//Start Development info
@@ -136,14 +145,15 @@
 				}
 			}
 			
-			
-			arrangeTabs();
-			$dropdownTabs().each( function() {
-				manageActive($(this));
-			});
-			
-			$visibleTabs().each( function() {
-				manageActive($(this));
+			$(document).ready(function(){
+				arrangeTabs();
+				$dropdownTabs().each( function() {
+					manageActive($(this));
+				});
+				
+				$visibleTabs().each( function() {
+					manageActive($(this));
+				});
 			});
 			
 			$( window ).resize(function() {
