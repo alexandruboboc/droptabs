@@ -74,7 +74,7 @@ How to Use
 <ul class="nav nav-tabs droptabs">
 	<li class="active always-visible"><a href="#home" data-toggle="tab">Home</a></li>
 	<li><a href="#profile" data-toggle="tab">Profile</a></li>
-	<li><a href="#messages" data-toggle="tab"Messages</a></li>
+	<li><a href="#messages" data-toggle="tab">Messages</a></li>
 	<li><a href="#settings" data-toggle="tab">This is the settings tab</a></li>
 	<li><a href="#settings1" data-toggle="tab">This is second the settings tab</a></li>
 	<li><a href="#settings2" data-toggle="tab">This is the third settings tab</a></li>

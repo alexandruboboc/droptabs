@@ -1,6 +1,6 @@
 /* Copyright (c) 2014 Alexandru Boboc
- * Droptabs v.1 Jquery Plugin
- * Tested with JQuery 1.10.1
+ * Droptabs v.1.1 Jquery Plugin
+ * Tested with JQuery 1.11.1
  */
 
 (function($) {
@@ -53,7 +53,6 @@
 				})
 				$('a', $(elem)).on('shown.bs.tab', function (e) {
 					if ($(dropdown).hasClass('active')) {
-						//$('>a', dropdown).html('Selected <b class="caret"></b>');
 						$('>a', dropdown).html(($('>li.active>a', dropdownMenu).html()).substring(0,10) + '... <b class="caret"></b>');
 					} else {
 						$('>a', dropdown).html('Dropdown <b class="caret"></b>'); 
@@ -106,10 +105,8 @@
 					var x = availableSpace();
 					$($visibleTabs().get().reverse()).each(function( index ){
 						if (!($(this).hasClass('always-visible'))){	
-								var clone=$(this).clone().prependTo(dropdownMenu);
-								manageActive(clone);
-								x=x+clone.outerWidth();
-								$(this).remove(); 
+								$(this).prependTo(dropdownMenu);
+								x=x+$(this).outerWidth();
 						}  
 						if (x>=0) {return false;}
 					});
@@ -119,10 +116,8 @@
 					var x = availableSpace();
 					$($dropdownTabs()).each(function( index ){
 						if (getHiddenElementWidth(this) < x && !($(this).hasClass('always-dropdown'))){	
-							var clone = $(this).clone().appendTo($container);	
-							manageActive(clone);
-							x = x-clone.outerWidth();
-							$(this).remove();
+							$(this).appendTo($container);	
+							x = x-$(this).outerWidth();
 						} else {return false;}
 					 });
 				}
