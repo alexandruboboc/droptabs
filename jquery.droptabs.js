@@ -55,7 +55,7 @@
 				})
 				$('a', $(elem)).on('shown.bs.tab', function (e) {
 					if ($(dropdown).hasClass('active')) {
-						$('>a', dropdown).html(($('>li.active>a', dropdownMenu).html()).substring(0,10) + '... <b class="caret"></b>');
+						$('>a', dropdown).html(($.trim($('>li.active>a', dropdownMenu).html())).substring(0,10) + '... <b class="caret"></b>');
 					} else if (dropdownLabel) {
 						// Try to use the dropdown label used on-create
 						$('>a', dropdown).html(dropdownLabel);
