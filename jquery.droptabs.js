@@ -24,9 +24,11 @@
 			var $container = $(this);
 			var dropdown = $(s.dropdownSelector, this);
 			var dropdownMenu = $(s.dropdownMenuSelector, dropdown);
-			// Get the initial dropdown label (caret and all).
-			var dropdownLabel = $('>a', dropdown).html();
+			var dropdownLabel = $('>a', dropdown).clone();
 			var dropdownCaret = $(s.dropdownCaretSelector, dropdown);
+
+			// We onyl want the default label, strip the caret out
+			$(s.dropdownCaretSelector, dropdownLabel).remove();
 
 			var $dropdownTabs = function () {
 				return $(s.dropdownTabsSelector, dropdownMenu);
@@ -50,20 +52,30 @@
 				return hiddenElementWidth;
 			}
 
+			function getDropdownLabel() {
+				var labelText = 'Dropdown';
+				if ($(dropdown).hasClass('active')) {
+					labelText = $('>li.active>a', dropdownMenu).html();
+				} else if (dropdownLabel.html().length > 0) {
+					labelText = dropdownLabel.html();
+				}
+
+				labelText = $.trim(labelText);
+
+				if (labelText.length > 10) {
+					labelText = labelText.substring(0, 10) + '...';
+				}
+
+				return labelText;
+			}
+
 			function manageActive(elem) {
 				//fixes a bug where Bootstrap can't remove the 'active' class on elements after they've been hidden inside the dropdown
 				$('a', $(elem)).on('show.bs.tab', function (e) {
 					$(e.relatedTarget).parent().removeClass('active');
 				})
 				$('a', $(elem)).on('shown.bs.tab', function (e) {
-					if ($(dropdown).hasClass('active')) {
-						$('>a', dropdown).html(($.trim($('>li.active>a', dropdownMenu).html())).substring(0,10) + '... ' + dropdownCaret.prop('outerHTML'));
-					} else if (dropdownLabel) {
-						// Try to use the dropdown label used on-create
-						$('>a', dropdown).html(dropdownLabel);
-					} else {
-						$('>a', dropdown).html('Dropdown ' + dropdownCaret.prop('outerHTML'));
-					}
+					$('>a', dropdown).html(getDropdownLabel() + ' ' + dropdownCaret.prop('outerHTML'));
 				})
 
 			}
