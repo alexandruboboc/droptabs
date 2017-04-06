@@ -62,6 +62,11 @@ Whether to auto arrange tabs that are always visible in front of all other tabs.
 
 **Default: 'true'**
 
+### pullDropdownRight
+Whether to make the dropdown float to the right of the current container. If false, will keep the dropdown inline to the right of the visible tabs.
+
+**Default: 'true'**
+
 ### development
 This enables a fixed developer div that shows some live info. Only for use in development mode.
 
@@ -84,7 +89,7 @@ How to Use
 	<li><a href="#settings1" data-toggle="tab">This is second the settings tab</a></li>
 	<li><a href="#settings2" data-toggle="tab">This is the third settings tab</a></li>
 	<li class="always-visible"><a href="#settings3" data-toggle="tab">This is always visible</a></li>
-	<li class="dropdown pull-right">
+	<li class="dropdown">
 		<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 		<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
 			<li class="always-dropdown"><a href="#settings4" data-toggle="tab">Always in dropdown</a></li>

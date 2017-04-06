@@ -16,6 +16,7 @@
 			visibleTabsSelector			: ">li:not(.dropdown)",
 			developmentId				: "dt-devInfo",
 			autoArrangeTabs				: true,
+			pullDropdownRight   : true,
 			development					: false
         }, o);
 
@@ -27,8 +28,12 @@
 			var dropdownLabel = $('>a', dropdown).clone();
 			var dropdownCaret = $(s.dropdownCaretSelector, dropdown);
 
-			// We onyl want the default label, strip the caret out
+			// We only want the default label, strip the caret out
 			$(s.dropdownCaretSelector, dropdownLabel).remove();
+
+			if (s.pullDropdownRight) {
+				$(dropdown).addClass('pull-right');
+			}
 
 			var $dropdownTabs = function () {
 				return $(s.dropdownTabsSelector, dropdownMenu);
@@ -153,6 +158,11 @@
 							x = x-$(this).outerWidth();
 						} else {return false;}
 					 });
+
+					if (!s.pullDropdownRight && !$(dropdown).is(':last-child')) {
+						// If not pulling-right, keep the dropdown at the end of the container.
+						$(dropdown).detach().insertAfter($container.find('li:last-child'));
+					}
 				}
 
 				if ($dropdownTabs().length <= 0) {dropdown.hide();} else {dropdown.show();}
@@ -182,6 +192,8 @@
 				$visibleTabs().each( function() {
 					manageActive($(this));
 				});
+
+				checkDropdownSelection();
 			});
 
 			$( window ).resize(function() {
