@@ -69,15 +69,29 @@
 				return labelText;
 			}
 
+			function renderDropdownLabel() {
+				$('>a', dropdown).html(getDropdownLabel() + ' ' + dropdownCaret.prop('outerHTML'));
+			}
+
 			function manageActive(elem) {
 				//fixes a bug where Bootstrap can't remove the 'active' class on elements after they've been hidden inside the dropdown
 				$('a', $(elem)).on('show.bs.tab', function (e) {
 					$(e.relatedTarget).parent().removeClass('active');
 				})
 				$('a', $(elem)).on('shown.bs.tab', function (e) {
-					$('>a', dropdown).html(getDropdownLabel() + ' ' + dropdownCaret.prop('outerHTML'));
+					renderDropdownLabel();
 				})
 
+			}
+
+			function checkDropdownSelection() {
+				if ($($dropdownTabs()).filter('.active').length > 0) {
+					$(dropdown).addClass('active');
+				} else {
+					$(dropdown).removeClass('active');
+				}
+
+				renderDropdownLabel();
 			}
 
 			//Start Development info
@@ -172,6 +186,7 @@
 
 			$( window ).resize(function() {
 				arrangeTabs();
+				checkDropdownSelection();
 			});
 			return this;
         });
