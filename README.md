@@ -46,6 +46,11 @@ Jquery selector for the elements (tabs). This will only select elements under cu
 
 **Default: 'li'**
 
+### dropdownCaretSelector
+Jquery selector for the caret used in the dropdown label. This will only select elements under current container.
+
+**Default: 'b.caret'**
+
 ### visibleTabsSelector
 Jquery selector for the visible elements (tabs). This will only select elements under current container.
 **Will be changed soon, don't use it!

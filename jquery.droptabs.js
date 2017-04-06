@@ -12,6 +12,7 @@
 			dropdownSelector		 	: "li.dropdown",
 			dropdownMenuSelector		: "ul.dropdown-menu",
 			dropdownTabsSelector		: "li",
+			dropdownCaretSelector		: "b.caret",
 			visibleTabsSelector			: ">li:not(.dropdown)",
 			developmentId				: "dt-devInfo",
 			autoArrangeTabs				: true,
@@ -25,6 +26,7 @@
 			var dropdownMenu = $(s.dropdownMenuSelector, dropdown);
 			// Get the initial dropdown label (caret and all).
 			var dropdownLabel = $('>a', dropdown).html();
+			var dropdownCaret = $(s.dropdownCaretSelector, dropdown);
 
 			var $dropdownTabs = function () {
 				return $(s.dropdownTabsSelector, dropdownMenu);
@@ -55,12 +57,12 @@
 				})
 				$('a', $(elem)).on('shown.bs.tab', function (e) {
 					if ($(dropdown).hasClass('active')) {
-						$('>a', dropdown).html(($.trim($('>li.active>a', dropdownMenu).html())).substring(0,10) + '... <b class="caret"></b>');
+						$('>a', dropdown).html(($.trim($('>li.active>a', dropdownMenu).html())).substring(0,10) + '... ' + dropdownCaret.prop('outerHTML'));
 					} else if (dropdownLabel) {
 						// Try to use the dropdown label used on-create
 						$('>a', dropdown).html(dropdownLabel);
 					} else {
-						$('>a', dropdown).html('Dropdown <b class="caret"></b>');
+						$('>a', dropdown).html('Dropdown ' + dropdownCaret.prop('outerHTML'));
 					}
 				})
 
