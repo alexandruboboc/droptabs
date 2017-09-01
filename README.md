@@ -53,7 +53,7 @@ Jquery selector for the visible elements (tabs). This will only select elements 
 **Default: '>li:not(.dropdown)'**
 
 ### autoArrangeTabs
-Wether to auto arrange tabs that are always visible in front of all other tabs.
+Whether to auto arrange tabs that are always visible in front of all other tabs.
 
 **Default: 'true'**
 
