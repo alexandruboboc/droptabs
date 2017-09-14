@@ -46,6 +46,11 @@ Jquery selector for the elements (tabs). This will only select elements under cu
 
 **Default: 'li'**
 
+### dropdownCaretSelector
+Jquery selector for the caret used in the dropdown label. This will only select elements under current container.
+
+**Default: 'b.caret'**
+
 ### visibleTabsSelector
 Jquery selector for the visible elements (tabs). This will only select elements under current container.
 **Will be changed soon, don't use it!
@@ -54,6 +59,11 @@ Jquery selector for the visible elements (tabs). This will only select elements 
 
 ### autoArrangeTabs
 Whether to auto arrange tabs that are always visible in front of all other tabs.
+
+**Default: 'true'**
+
+### pullDropdownRight
+Whether to make the dropdown float to the right of the current container. If false, will keep the dropdown inline to the right of the visible tabs.
 
 **Default: 'true'**
 
@@ -79,7 +89,7 @@ How to Use
 	<li><a href="#settings1" data-toggle="tab">This is second the settings tab</a></li>
 	<li><a href="#settings2" data-toggle="tab">This is the third settings tab</a></li>
 	<li class="always-visible"><a href="#settings3" data-toggle="tab">This is always visible</a></li>
-	<li class="dropdown pull-right">
+	<li class="dropdown">
 		<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 		<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
 			<li class="always-dropdown"><a href="#settings4" data-toggle="tab">Always in dropdown</a></li>

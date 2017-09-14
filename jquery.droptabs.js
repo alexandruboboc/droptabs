@@ -12,9 +12,11 @@
 			dropdownSelector		 	: "li.dropdown",
 			dropdownMenuSelector		: "ul.dropdown-menu",
 			dropdownTabsSelector		: "li",
+			dropdownCaretSelector		: "b.caret",
 			visibleTabsSelector			: ">li:not(.dropdown)",
 			developmentId				: "dt-devInfo",
 			autoArrangeTabs				: true,
+			pullDropdownRight   : true,
 			development					: false
         }, o);
 
@@ -23,8 +25,15 @@
 			var $container = $(this);
 			var dropdown = $(s.dropdownSelector, this);
 			var dropdownMenu = $(s.dropdownMenuSelector, dropdown);
-			// Get the initial dropdown label (caret and all).
-			var dropdownLabel = $('>a', dropdown).html();
+			var dropdownLabel = $('>a', dropdown).clone();
+			var dropdownCaret = $(s.dropdownCaretSelector, dropdown);
+
+			// We only want the default label, strip the caret out
+			$(s.dropdownCaretSelector, dropdownLabel).remove();
+
+			if (s.pullDropdownRight) {
+				$(dropdown).addClass('pull-right');
+			}
 
 			var $dropdownTabs = function () {
 				return $(s.dropdownTabsSelector, dropdownMenu);
@@ -48,22 +57,46 @@
 				return hiddenElementWidth;
 			}
 
+			function getDropdownLabel() {
+				var labelText = 'Dropdown';
+				if ($(dropdown).hasClass('active')) {
+					labelText = $('>li.active>a', dropdownMenu).html();
+				} else if (dropdownLabel.html().length > 0) {
+					labelText = dropdownLabel.html();
+				}
+
+				labelText = $.trim(labelText);
+
+				if (labelText.length > 10) {
+					labelText = labelText.substring(0, 10) + '...';
+				}
+
+				return labelText;
+			}
+
+			function renderDropdownLabel() {
+				$('>a', dropdown).html(getDropdownLabel() + ' ' + dropdownCaret.prop('outerHTML'));
+			}
+
 			function manageActive(elem) {
 				//fixes a bug where Bootstrap can't remove the 'active' class on elements after they've been hidden inside the dropdown
 				$('a', $(elem)).on('show.bs.tab', function (e) {
 					$(e.relatedTarget).parent().removeClass('active');
 				})
 				$('a', $(elem)).on('shown.bs.tab', function (e) {
-					if ($(dropdown).hasClass('active')) {
-						$('>a', dropdown).html(($('>li.active>a', dropdownMenu).html()).substring(0,10) + '... <b class="caret"></b>');
-					} else if (dropdownLabel) {
-						// Try to use the dropdown label used on-create
-						$('>a', dropdown).html(dropdownLabel);
-					} else {
-						$('>a', dropdown).html('Dropdown <b class="caret"></b>');
-					}
+					renderDropdownLabel();
 				})
 
+			}
+
+			function checkDropdownSelection() {
+				if ($($dropdownTabs()).filter('.active').length > 0) {
+					$(dropdown).addClass('active');
+				} else {
+					$(dropdown).removeClass('active');
+				}
+
+				renderDropdownLabel();
 			}
 
 			//Start Development info
@@ -125,6 +158,11 @@
 							x = x-$(this).outerWidth();
 						} else {return false;}
 					 });
+
+					if (!s.pullDropdownRight && !$(dropdown).is(':last-child')) {
+						// If not pulling-right, keep the dropdown at the end of the container.
+						$(dropdown).detach().insertAfter($container.find('li:last-child'));
+					}
 				}
 
 				if ($dropdownTabs().length <= 0) {dropdown.hide();} else {dropdown.show();}
@@ -154,10 +192,13 @@
 				$visibleTabs().each( function() {
 					manageActive($(this));
 				});
+
+				checkDropdownSelection();
 			});
 
 			$( window ).resize(function() {
 				arrangeTabs();
+				checkDropdownSelection();
 			});
 			return this;
         });
