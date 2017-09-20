@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Droptabs demo</title>
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://rawgithub.com/alexandruboboc/droptabs/master/jquery.droptabs.js"></script>
+	
+</head>
+
+<body>
+	<div class="container-fluid ">
+		<ul class="nav nav-tabs droptabs">
+			<li class="active always-visible"><a href="#home" data-toggle="tab">Home</a></li>
+			<li><a href="#profile" data-toggle="tab">Profile</a></li>
+			<li><a href="#messages" data-toggle="tab">Messages</a></li>
+			<li><a href="#settings" data-toggle="tab">This is the settings tab</a></li>
+			<li><a href="#settings1" data-toggle="tab">This is second the settings tab</a></li>
+			<li><a href="#settings2" data-toggle="tab">This is the third settings tab</a></li>
+			<li class="always-visible"><a href="#settings3" data-toggle="tab">This is always visible</a></li>
+			<li class="dropdown pull-right">
+				<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+					<li class="always-dropdown"><a href="#settings4" data-toggle="tab">Always in dropdown</a></li>
+				</ul>
+		 </li>
+		</ul>
+		<div class="row-fluid ">
+			<div class="row-fluid">
+				<div class="tab-content span4">
+					<div class="tab-pane active" id="home">Home tab</div>
+					<div class="tab-pane" id="profile">Profile tab</div>
+					<div class="tab-pane" id="messages">Messages tab</div>
+					<div class="tab-pane" id="settings">This is the settings tab</div>
+					<div class="tab-pane" id="settings1">This is second the settings tab</div>
+					<div class="tab-pane" id="settings2">This is the third settings tab</div>
+					<div class="tab-pane" id="settings3">This is always visible</div>
+					<div class="tab-pane" id="settings4">Always in dropdown</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(".droptabs").droptabs({
+		development:true
+	});
+	</script>
+</body>
+</html>
