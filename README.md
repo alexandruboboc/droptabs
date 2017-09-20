@@ -8,7 +8,7 @@ Usage:
 Install
 -------
 
-You can download the latest stable version with download links in [Github Page](https://github.com/pippogsm/droptabs).
+You can download the latest stable version with download links in [Github Page](https://github.com/alexandruboboc/droptabs).
 
 Requirements
 ------------
@@ -19,7 +19,7 @@ Droptabs works with Bootstrap default [tab](http://getbootstrap.com/javascript/#
 
 Demo
 ------------
-Demo available [here](http://pippogsm.github.io/droptabs/).
+Demo available [here](http://alexandruboboc.github.io/droptabs/).
 
 Optional parameters
 -------------------
@@ -111,7 +111,7 @@ How to Use
 	</div>
 </div>
 ```
-When the html document is like above, just use like this:
+For the HTML structure seen above, just call droptabs on the desired element, like this:
 ```javascript
 $(".droptabs").droptabs();
 ```
